@@ -1,0 +1,6 @@
+FROM library/ubuntu:16.04
+
+ADD ./build/bonus /opt/app/bonus
+ADD ./src/config/config.yaml /home/bv/.gvm/pkgsets/go1.8/global/src/config/config.yaml
+
+CMD ./opt/app/bonus

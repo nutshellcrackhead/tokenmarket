@@ -1,0 +1,16 @@
+{
+  "DisableAll": true,
+  "Enable": [
+    "dupl",
+    "deadcode",
+    "misspell",
+    "unused",
+    "golint",
+    "vet",
+    "gosimple",
+    "goconst",
+    "gosimple",
+    "staticcheck",
+    "gas"
+  ]
+}

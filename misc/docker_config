@@ -1,0 +1,3 @@
+DOCKER_REDIS="-p 6379:6379 -h token-redis --network token_natasha -v $PWD/misc/redis.conf:/usr/local/etc/redis/redis.conf"
+DOCKER_POSTGRES="-p 5432:5432 -h token-postgres --network token_natasha -e POSTGRES_USER=token -e POSTGRES_PASSWORD=token -e POSTGRES_DB=token"
+DOCKER_KAFKA="-p 2181:2181 -p 9092:9092 -h token-kafka --network token_natasha -e CONSUMER_THREADS=3"

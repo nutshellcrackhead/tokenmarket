@@ -1,0 +1,9 @@
+db:
+    host: token-postgres
+    port: 5432
+    user: token
+    password: token
+    dbname: token
+cache:
+    network: tcp
+    address: token-redis:6379

@@ -1,0 +1,42 @@
+package: .
+ignore:
+- api
+- auth
+- bonus
+- config
+- deposits
+- helpers
+- migrations
+- operations
+- profile
+- protos
+- referral
+- tests
+- wallet
+import:
+- package: github.com/labstack/echo
+  version: ^3.0.3
+  subpackages:
+  - middleware
+- package: github.com/spf13/viper
+- package: github.com/fsnotify/fsnotify
+  version: v1.4.2
+- package: github.com/tanel/dbmigrate
+- package: github.com/micro/go-plugins
+  subpackages:
+  - tree/master/broker/kafka
+  - tree/master/registry/zookeeper
+- package: github.com/micro/go-micro
+- package: golang.org/x/net
+  subpackages:
+  - context
+- package: github.com/jackc/pgx
+  version: ~2.9.0
+- package: github.com/jmoiron/sqlx
+- package: github.com/Masterminds/squirrel
+- package: github.com/garyburd/redigo
+  version: ~1.0.0
+- package: github.com/asaskevich/govalidator
+  version: ~5.0.0
+- package: github.com/robfig/cron
+  version: ~1.0.0

@@ -1,0 +1,78 @@
+version: '2'
+
+services:
+  token-api:
+    build:
+        context: .
+        dockerfile: ./misc/dockerfiles/Dockerfile.api
+    image: token-api
+    expose:
+     - "8080"
+    restart: always
+    networks:
+     - natasha
+
+  token-auth-1:
+    build:
+        context: .
+        dockerfile: ./misc/dockerfiles/Dockerfile.auth
+    image: token-auth
+    restart: always
+    networks:
+     - natasha
+
+  token-profile-1:
+    build:
+        context: .
+        dockerfile: ./misc/dockerfiles/Dockerfile.profile
+    image: token-profile
+    restart: always
+    networks:
+     - natasha
+
+  token-referral-1:
+    build:
+        context: .
+        dockerfile: ./misc/dockerfiles/Dockerfile.referral
+    image: token-referral
+    restart: always
+    networks:
+     - natasha
+
+  token-wallet-1:
+    build:
+        context: .
+        dockerfile: ./misc/dockerfiles/Dockerfile.wallet
+    image: token-wallet
+    restart: always
+    networks:
+     - natasha
+
+  token-operations-1:
+    build:
+        context: .
+        dockerfile: ./misc/dockerfiles/Dockerfile.operations
+    image: token-operations
+    restart: always
+    networks:
+     - natasha
+
+  token-deposits-1:
+    build:
+        context: .
+        dockerfile: ./misc/dockerfiles/Dockerfile.deposits
+    image: token-deposits
+    restart: always
+    networks:
+     - natasha
+
+  token-bonus-1:
+    build:
+        context: .
+        dockerfile: ./misc/dockerfiles/Dockerfile.bonus
+    image: token-bonus
+    restart: always
+    networks:
+        - natasha
+networks:
+  natasha:

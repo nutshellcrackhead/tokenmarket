@@ -1,0 +1,1 @@
+FROM library/redis:3.0

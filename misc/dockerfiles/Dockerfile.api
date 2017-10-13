@@ -1,0 +1,10 @@
+FROM library/ubuntu:16.04
+
+ADD ./build/api /opt/app/api
+ADD ./src/config/config.yaml /home/bv/.gvm/pkgsets/go1.8/global/src/config/config.yaml
+ADD ./src/api/server/cert.pem /home/bv/.gvm/pkgsets/go1.8/global/src/api/server/cert.pem
+ADD ./src/api/server/key.pem /home/bv/.gvm/pkgsets/go1.8/global/src/api/server/key.pem
+EXPOSE 8080
+EXPOSE 30000-65535
+
+CMD ./opt/app/api

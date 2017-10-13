@@ -1,0 +1,235 @@
+syntax = "proto2";
+option go_package = "api";
+
+// Profile
+service Profile {
+    rpc Get(ProfileGetRequest) returns (ProfileData) {}
+    rpc Patch(ProfilePatchRequest) returns (ProfileData) {}
+    rpc Cities(ProfileCitiesRequest) returns (ProfileCitiesResponse) {}
+}
+
+message City {
+    optional int64 id = 1;
+    optional string city = 2;
+    optional string country = 3;
+    optional string region = 4;
+}
+
+message ProfileGetRequest {
+    required int64 id = 1;
+}
+
+message ProfilePatchRequest {
+    required int64 id = 1;
+    optional string avatar = 2;
+    optional int64 location = 3;
+    optional string skype = 4;
+}
+
+message ProfileData {
+    required int64 id = 1;
+    required string username = 2;
+    optional string avatar = 3;
+    required string email = 4;
+    optional City location = 5;
+    optional string skype = 6;
+    required string phone = 7;
+    required bool muted = 8;
+}
+
+message ProfileCitiesRequest {
+    required string city_fragment = 1;
+}
+
+message ProfileCitiesResponse {
+    repeated City cities = 1;
+}
+
+// Auth
+service Auth {
+    rpc Login(AuthLoginRequest) returns (AuthTokenData) {}
+    rpc Logout(AuthLogoutRequest) returns (AuthLogoutResponse) {}
+    rpc Register(AuthRegisterRequest) returns (AuthTokenData) {}
+    rpc ProlongSession(AuthTokenData) returns (AuthProlongSessionResponse) {}
+    rpc ResetPassword(AuthResetPasswordRequest) returns (AuthResetPasswordResponse) {}
+}
+
+message AuthLoginRequest {
+    required string username = 1;
+    required string password = 2;
+}
+
+message AuthTokenData {
+    required string token = 1;
+}
+
+message AuthLogoutRequest {
+    required int64 id = 1;
+    required string token = 2;
+}
+
+message AuthLogoutResponse {}
+
+message AuthRegisterRequest {
+    required string username = 1;
+    required string password = 2;
+    required string email = 3;
+    required string phone = 4;
+    optional string referrer = 5;
+    optional string leg = 6;
+}
+
+message AuthResetPasswordRequest {
+    required string email = 1;
+}
+
+message AuthResetPasswordResponse {
+    required string status = 1;
+}
+
+message AuthProlongSessionResponse {
+    required int64 id = 1;
+}
+
+// Wallet
+service Wallet {
+    rpc Status(WalletStatusRequest) returns (WalletStatusResponse) {}
+    rpc OperationsList(WalletOperationsListRequest) returns (WalletOperationsList) {}
+}
+
+message WalletStatusRequest {
+    required int64 id = 1;
+}
+
+message WalletStatusResponse {
+    repeated WalletStatus state = 1;
+}
+
+message WalletStatus {
+    required string currency = 1;
+    required float amount = 2;
+}
+
+message WalletOperationsListRequest {
+    required int64 id = 1;
+    required int64 page = 2;
+}
+
+message WalletOperationsList {
+    repeated WalletOperation data = 1;
+}
+
+message WalletOperation {
+    required int64 id = 1;
+    required int64 date = 2;
+    required string type = 3;
+    required string status = 4;
+    optional float amount = 5;
+    optional string action = 6;
+    optional string currency = 7;
+}
+
+// Referral
+service Referral {
+    rpc List(ReferralListRequest) returns (ReferralPartnerList) {}
+}
+
+message ReferralListRequest {
+    required int64 id = 1;
+    required int64 page = 2;
+}
+
+message ReferralPartnerList {
+    repeated ReferralPartner data = 1;
+}
+
+message ReferralPartner {
+    optional string avatar = 1;
+    required string username = 2;
+    required int64 level = 3;
+    required string leg = 4;
+    required int64 registered = 5;
+    required float revenue = 6;
+    required string referrer = 7;
+    required string parent = 8;
+}
+
+// Operations
+service Operations {
+    rpc CreatePayment(CreatePaymentRequest) returns (CreatePaymentResponse) {}
+    rpc ActivateUser(CreatePaymentRequest) returns (CreatePaymentResponse) {}
+    rpc UpdatePaymentStatus(UpdatePaymentRequest) returns (UpdatePaymentResponse) {}
+    rpc CreatePayout(CreatePayoutRequest) returns (CreatePayoutResponse) {}
+}
+
+message CreatePayoutRequest {
+    required int64 id = 1;
+    required string method = 2;
+    required float amount = 3;
+    required string currency = 4;
+    required string account = 5;
+}
+
+message CreatePayoutResponse {
+    required string status = 1;
+}
+
+message CreatePaymentRequest {
+    required int64 id = 1;
+    required string method = 2;
+    required float amount = 3;
+    required string currency = 4;
+}
+
+message CreatePaymentResponse {
+    required int64 id = 1;
+    required string token = 2;
+    required string merchant_account = 3;
+    required float amount = 4;
+    required string currency = 5;
+    required string method = 6;
+}
+
+message UpdatePaymentRequest {
+    required int64 operation_id = 1;
+    required string token = 2;
+    required float amount = 3;
+    required string currency = 4;
+    required string method = 5;
+    required string status = 6;
+}
+
+message UpdatePaymentResponse {
+    required string status = 1;
+}
+
+// Deposits
+service Deposits {
+    rpc GetDeposits(GetDepositsRequest) returns (DepositsList) {}
+    rpc CreateDeposit(CreateDepositRequest) returns (DepositItem) {}
+}
+
+message GetDepositsRequest {
+    required int64 id = 1;
+    required int64 page = 2;
+}
+
+message DepositItem {
+    required int64 date = 1;
+    required int64 valid = 2;
+    required string currency = 3;
+    required float amount = 4;
+    required string status = 5;
+    required float paidout = 6;
+    required int64 paydate = 7;
+}
+
+message DepositsList {
+    repeated DepositItem data = 1;
+}
+
+message CreateDepositRequest {
+    required int64 id = 1;
+    required float amount = 2;
+    required string currency = 3;
+}

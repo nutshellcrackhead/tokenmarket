@@ -1,0 +1,1 @@
+ALTER TABLE "public"."token_users" ADD UNIQUE ("email");
